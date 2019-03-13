@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+    <script type="text/javascript" src="../js/plugins/angularjs/angular.min.js"></script>
+	 <script type="text/javascript" src="../js/base.js"></script>
+	<script type="text/javascript" src="../js/service/EmpService.js"></script>
+	<script type="text/javascript" src="../js/controller/EmpController.js"></script> <!-- -- -->
+</head>
+<body ng-app="show" ng-controller="EmpController">
+{{1+1}}{{empImg}}
+<br/>
+<!-- <input type="file" id="file" style="visibility:hidden" ng-model="empImg.Img" >
+<input type="text"  ng-model="empImg.Img"/>
+<input type=button id=filebutton value="文件上传" onclick="file.click()"><br/> -->
+
+<input type="file" id="file" />
+ 
+<img src="../img/421785d6-d76c-46a5-86b4-2cfcb9d0e0fbbanner1.png" width="100px" height="100px"/>
+<input type="button" value="保存"  ng-click="uploadFile()"/>
+
+<a href="../emp/OriDownload.do?fileName=421785d6-d76c-46a5-86b4-2cfcb9d0e0fbbanner1.png">图片</a>
+</body>
+</html>

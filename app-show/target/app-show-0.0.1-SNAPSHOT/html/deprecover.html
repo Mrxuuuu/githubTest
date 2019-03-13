@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title></title>
+
+    <link rel="stylesheet" href="../js/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../js/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../js/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="../js/plugins/angularjs/angular.min.js"></script>
+
+    <!-- 分页组件开始 -->
+	<script src="../js/plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../js/plugins/angularjs/pagination.css"/>
+	<link  rel="stylesheet" type="text/css" href="../css/doclist.css"/>
+	<!-- 分页组件结束 -->
+	
+	<script type="text/javascript" src="../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../js/service/DepRecoverService.js"></script>
+	<script type="text/javascript" src="../js/controller/DepRecoverController.js"></script>
+<style type="text/css">
+table tr td{
+height:35px;
+	
+	text-align:center;
+	font-size:16px;
+	border:1px #FF9966 solid;
+	}
+</style>
+</head>
+
+<body ng-app="show" ng-controller="DepRecoverController">
+{{1+1}}
+<div style="font-size:14px;width:1200px;height:50px;border:1px red solid;background-color:#EDF6FA;margin-top:0px;">
+<div style="margin-top:17px;margin-left:3px;font-weight:500">位置：
+ <a class="a2" href="../html/index.html">首页</a> <img src="../images/rlist.gif"/> 
+ <a class="a2" href="../html/deprecover.html">被删部门管理 </a> <img src="../images/rlist.gif"/>
+ <a class="a2" href="#">基本内容</a></div>
+ </div>
+ <div style="margin-top:5px;background-color:#EDF6FA;width:1200px">
+  
+ <!--添加
+ <a href="#">
+ <button style="padding-left:2px; onclick=">
+ <div  style=" margin-top:3px; margin-left:2px; float:left;">
+ <img src="../images/iadd.png" /></div>
+ <div style="float:left; margin-left:3px;margin-top:3px;">添加</div></button></a>--></div>
+
+	<div style="background-color:#FFFAFA;width:1200px;">
+	<!-- <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="entity={}" ><i class="fa fa-file-o"></i> 新建</button> -->
+    <!-- <button type="button" class="btn btn-default" title="删除" ng-click="dele()"><i class="fa fa-trash-o" ></i> 删除</button>            -->
+    <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+    <a href="../html/index.html" class="btn btn-default"><i class="fa fa-trash-o" ></i>返回主页</a>
+	<table style="border:1px #CC66CC solid;">
+	<tr id="tr1">
+	<td style="width:100px;border:1px #CC66CC solid;font-size:14px; font-weight:800;">编号</td>
+	<td style="width:270px;border:1px #CC66CC solid;font-size:14px; font-weight:800;">部门名称</td>
+	<td style="width:370px;border:1px #CC66CC solid;font-size:14px; font-weight:800;">部门职责</td>
+	<td style="width:370px;border:1px #CC66CC solid;font-size:14px; font-weight:800;">部门备注</td>
+	<td style="width:100px;border:1px #CC66CC solid;font-size:14px; font-weight:800;">恢复该部门</td>
+	<td style="width:100px;border:1px #CC66CC solid;font-size:14px; font-weight:800;">删除部门</td>
+	</tr>
+
+	<tr id="tr2" ng-repeat="entity in list">
+	<!-- <input type="hidden" ng-model=entity.id/> -->
+	<td id="td1">{{entity.depId}}</td>
+	<td id="td2">{{entity.depName}}</td>
+	<td id="td3">{{entity.depDuty}}</td>
+	<td id="td3">{{entity.depDesc}}</td>
+	<td id="td4"><button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="recover(entity.depId)" >恢复该部门</button></td>
+	<td id="td5"> <a  class="btn bg-olive btn-xs" href="#" ng-click="delById(entity.depId)"><img src="../images/close1.png" id="img1"/>删除</a></td>
+	</tr>
+	
+	</table>
+	<tm-pagination conf="paginationConf"></tm-pagination>
+	</div>
+
+
+<!-- 编辑页面
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">品牌编辑</h3>
+		</div>
+		<div class="modal-body">		
+			<table class="table table-bordered table-striped"  width="800px">
+			
+		      	<tr>
+		      		<td>部门名称</td>
+		      		<td><input  class="form-control" placeholder="部门名称" ng-model="entity.depName">  </td>
+		      	</tr>		      	
+		      	<tr>
+		      		<td>部门职责</td>
+		      		<td><input  class="form-control" placeholder="部门职责" ng-model="entity.depDuty">  </td>
+		      	</tr>	
+		      	 <td>部门状态</td>
+		      		<td><input  class="form-control" placeholder="部门状态" ng-model="entity.depStatu">  </td>
+		      	</tr>	
+		      	<tr>
+		      		<td>部门备注</td>
+		      		<td><input  class="form-control" placeholder="部门备注" ng-model="entity.depDesc">  </td>
+		      	</tr>		      	
+			 </table>				
+		</div>
+		<div class="modal-footer">						
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true">关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+ -->
+</body>
+</html>

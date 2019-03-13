@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuwem.show.mapper.OrderMapper">
+
+   <resultMap id="BaseResultMap" type="com.xuwem.show.pojo.Order" >
+    <id column="ord_id" property="ordId" jdbcType="BIGINT" />
+    <result column="ord_type" property="ordType" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="charge_id" property="chargeId" jdbcType="BIGINT" />
+    <result column="ord_time" property="ordTime" jdbcType="DATE" />
+    <result column="ord_statu" property="ordStatu" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_num" property="goodsNum" jdbcType="BIGINT" />
+  </resultMap>
+  
+   <!-- 查询全部 -->
+   <select id="findAll" resultMap="BaseResultMap">
+     select * from ord
+   </select>
+   
+   
+   <!-- 根据id查找 -->
+   <select id="findById" parameterType="int" resultMap="BaseResultMap">
+     select * from ord where ord_id=#{id}
+   </select>
+   
+   <!-- 根据实体修改 -->
+    <update id="update" parameterType="orderVo">
+       update ord
+       <set>
+          <if test="ordType!=null and ordType!=''">
+            ord_type=#{ordType},
+          </if>
+          
+          <if test="userId!=null and userId!=''">
+            user_id=#{userId},
+          </if>
+          
+          <if test="chargeId!=null and chargeId!=''">
+            charge_id=#{chargeId},
+          </if>
+          
+          <if test="ord_statu!=null and ordStatu!=''">
+            ord_statu=#{ordStatu},
+          </if>
+          
+          <if test="price!=null and price!=''">
+            price=#{price},
+          </if>
+          
+          <if test="goods_name!=null and goodsName!=''">
+            goods_name=#{goodsName},
+          </if>
+       </set>
+       where ord_id=#{ordId}
+    </update>
+</mapper>
+	

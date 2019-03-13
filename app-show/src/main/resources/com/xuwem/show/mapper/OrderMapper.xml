@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuwem.show.mapper.OrderMapper">
+
+   <resultMap id="BaseResultMap" type="com.xuwem.show.pojo.Order" >
+    <id column="ord_id" property="ordId" jdbcType="BIGINT" />
+    <result column="ord_type" property="ordType" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="charge_id" property="chargeId" jdbcType="BIGINT" />
+    <result column="ord_time" property="ordTime" jdbcType="TIMESTAMP" />
+    <result column="ord_statu" property="ordStatu" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="BIGINT" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_num" property="goodsNum" jdbcType="BIGINT" />
+  </resultMap>
+  
+   <!-- 查询全部 -->
+   <select id="findAll" resultMap="BaseResultMap">
+     select * from ord
+   </select>
+   
+   
+   <!-- 根据id查找 -->
+   <select id="findById" parameterType="int" resultMap="BaseResultMap">
+     select * from ord where ord_id=#{id}
+   </select>
+   
+   <!-- 根据实体修改 -->
+    <update id="update">
+       update ord
+       <set>
+          <if test="ordType!=null and ordType!=''">
+            ord_type=#{ordType},
+          </if>
+          
+          <if test="userId!=null and userId!=''">
+            user_id=#{userId},
+          </if>
+          
+          <if test="chargeId!=null and chargeId!=''">
+            charge_id=#{chargeId},
+          </if>
+          
+          <if test="ordStatu!=null and ordStatu!=''">
+            ord_statu=#{ordStatu},
+          </if>
+          
+          <if test="price!=null and price!=''">
+            price=#{price},
+          </if>
+          
+          <if test="goodsName!=null and goodsName!=''">
+            goods_name=#{goodsName},
+          </if>
+          
+          <if test="goodsNum!=null and goodsNum!=''">
+            goods_num=#{goodsNum},
+          </if>
+       </set>
+       where ord_id=#{ordId}
+    </update>
+    
+    
+    <!-- 新增订单 -->
+    <insert id="add" parameterType="com.xuwem.show.pojo.Order">
+       insert into ord
+       <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="ordType!=null">
+            ord_type,
+          </if>
+          
+          <if test="userId!=null">
+            user_id,
+          </if>
+          
+          <if test="chargeId!=null">
+            charge_id,
+          </if>
+          
+       
+           ord_time,
+         
+          
+          <if test="ordStatu!=null">
+            ord_statu,
+          </if>
+          
+          <if test="price!=null">
+            price,
+          </if>
+          
+          <if test="goodsName!=null">
+            goods_name,
+          </if>
+          
+          <if test="goodsNum!=null">
+            goods_num,
+          </if>
+         
+       </trim>
+       
+       <trim prefix="values(" suffix=")" suffixOverrides=",">
+            <if test="ordType!=null">
+            #{ordType},
+          </if>
+          
+          <if test="userId!=null">
+            #{userId},
+          </if>
+          
+          <if test="chargeId!=null">
+            #{chargeId},
+          </if>
+          
+           #{ordTime},
+          
+          <if test="ordStatu!=null">
+            #{ordStatu},
+          </if>
+          
+          <if test="price!=null">
+            #{price},
+          </if>
+          
+          <if test="goodsName!=null">
+            #{goodsName},
+          </if>
+          
+          <if test="goodsNum!=null">
+            #{goodsNum},
+          </if>
+          
+          
+       </trim>
+    </insert>
+    
+    <!-- 根据id删除 -->
+    <delete id="delById" parameterType="int">
+       delete from ord where ord_id=#{ordId}
+    </delete>
+    
+    <!-- 根据名字模糊查询 -->
+    <select id="findByName" parameterType="String" resultMap="BaseResultMap">
+      SELECT * FROM ord WHERE goods_name like "%"#{goodsName}"%"
+    </select>
+    
+    <!-- 在order表中根据userId查询 -->
+    <select id="findByUserId" parameterType="int" resultMap="BaseResultMap">
+      select * from ord where user_id=#{userId}
+    </select>
+    
+</mapper>
+	

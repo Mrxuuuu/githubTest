@@ -1,0 +1,93 @@
+*{
+	margin: 0px;
+	padding: 0px;
+}
+
+body{
+	background-color: rgb(28,119,172)
+}
+.header{
+	height: 47px;
+	background-image: url(../images/loginbg1.png);
+	line-height: 47px;
+	color: #afc5d2;
+	font-size: 12px;
+}
+.header span{
+	background: url(../images/loginsj.png) no-repeat 24px;
+	text-indent: 44px;
+	position: absolute;
+}
+.body{
+	height: 585px;
+	background: url(../images/loginbg3.png) no-repeat;
+}
+.system_log{
+	background: url(../images/loginlogo.png);
+	height: 71px;
+	margin-top: 120px;
+	width: 276px;
+	margin: 120px auto 0px;
+}
+.header ul{
+	padding-top: 4px;
+	padding-left: 1720px;
+}
+.header ul li{
+	list-style-type: none;
+	float: left;
+	width: 48px;
+	
+}
+a{
+	text-decoration: none;
+	color: #afc5d2;
+}
+.login_body{
+	width: 692px;
+	height: 373px;
+	background: url(../images/logininfo2.png);
+	margin: auto;
+	
+}
+.loginuser{
+	width: 260px;
+	height: 48px;
+	background: url(../images/loginuser.png) ;
+	border: none;
+	line-height: 48px;
+	margin: 85px 286px 0px;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 40px;
+}
+.loginpassword{
+	width: 260px;
+	height: 48px;
+	background: url(../images/loginuser.png) ;
+	border: none;
+	line-height: 48px;
+	margin: 25px 286px;
+	font-size: 14px;
+	font-weight: bold;
+padding-left: 40px;
+}
+
+.loginsubmit{
+	width: 111px;
+	height: 35px;
+	background: url(../images/buttonbg.png) repeat-x;
+	font-size: 14px;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+	line-height: 35px;	
+	margin-left: 286px;
+	margin-right: 23px ;
+	border: 0px;
+}
+form span{
+	font-weight: bold;
+	color: #687f92;
+	font-size: 12px;
+}

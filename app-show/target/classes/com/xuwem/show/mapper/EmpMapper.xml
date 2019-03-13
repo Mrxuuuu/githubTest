@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuwem.show.mapper.EmpMapper">
+
+   <resultMap id="BaseResultMap" type="com.xuwem.show.pojo.Employee" >
+    <id column="emp_id" property="empId" jdbcType="BIGINT" />
+    <result column="emp_name" property="empName" jdbcType="VARCHAR" />
+    <result column="emp_sex" property="empSex" jdbcType="VARCHAR" />
+    <result column="emp_age" property="empAge" jdbcType="VARCHAR" />
+    <result column="depart" property="depart" jdbcType="VARCHAR" />
+    <result column="emp_statu" property="empStatu" jdbcType="VARCHAR" />
+    <result column="emp_img" property="empImg" jdbcType="VARCHAR" />
+    <result column="emp_post" property="empPost" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+  </resultMap>
+   
+ 
+    <!-- 查找全部   -->
+    <select id="findAll" resultMap="BaseResultMap">
+      select * from emp
+    </select>
+    
+    <!--  根据id查询 -->
+   <select id="findById" parameterType="int" resultMap="BaseResultMap">
+     select * from emp where emp_id=#{empId} 
+   </select>
+   
+   <!-- 插入文件路径 
+   <insert id="uploadFile" parameterType="employee">
+      insert into emp 
+      <trim>
+      
+      </trim>
+   </insert>
+   -->
+   
+   
+   <update id="uploadFile" parameterType="employee">
+      update emp set emp_img=#{empImg} where emp_id=#{empId};
+   </update>
+</mapper>

@@ -1,0 +1,61 @@
+*{
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+}
+.place{
+	height: 40px;
+	background: url(../../images/righttop.gif) repeat-x;
+}
+.place span{
+	line-height: 40px;
+	font-weight: bold;
+	margin-left: 12px;
+	float: left;
+}
+.place ul li{
+	float: left;
+	height: 40px;
+	line-height: 40px;
+	list-style-type: none;
+	padding-left: 7px;
+	padding-right: 7px;
+}
+.tools a{
+	display: block;
+	width: 100px;
+	height: 33px;
+	background: url(../../images/toolbg.gif);
+	border: solid 1px #d3dbde;
+    float: left;
+    padding-right: 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+    line-height: 33px;
+    margin: 8px 0px 8px 8px;
+    text-decoration: none;
+    
+}
+.tools img{
+	width: 24px;
+	height: 24px;
+	padding-left: 10px;
+	padding-right: 6px;
+
+}
+.emp_info{
+	border: solid 1px #cbcbcb;
+	width: 100%;
+	margin: 8px 0px 8px 8px;
+}
+td{
+	text-align: center;
+	height: 40px;
+}
+th{
+	height: 30px;
+}
+dt a{
+	color: black;
+	font-family: "黑体";
+}

@@ -1,0 +1,41 @@
+
+*{
+	padding: 0px;
+	margin: 0px;
+	font-size: 12px;
+}
+.top_left{
+	height: 88px;
+	background: url(../../images/topleft.jpg)  289px  88px repeat-x ;
+	width: 300px;
+	float: left;
+}
+.img{
+	margin-top: 10px;
+	
+}
+
+.top_right{
+	background-color: #046DAE;
+	height: 88px;
+}
+
+ul li{
+	list-style: none;
+	background-color:red ;
+	width: 87px;
+	height: 88px;
+	float: left;
+	padding-left: 20px;
+	background: url(../../images/navbg.png);
+	background-color: #046DAE;
+	
+}
+ul li a{
+	display: block;
+	width: 87px;
+	height: 88px;
+	float: left;
+	text-decoration: none;
+	
+}

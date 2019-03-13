@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xuwem.show.mapper.DepRecoverMapper">
+
+   <resultMap id="BaseResultMap" type="com.xuwem.show.pojo.Department" >
+    <id column="dep_id" property="depId" jdbcType="BIGINT" />
+    <result column="dep_name" property="depName" jdbcType="VARCHAR" />
+    <result column="dep_duty" property="depDuty" jdbcType="VARCHAR" />
+    <result column="dep_statu" property="depStatu" jdbcType="VARCHAR" />
+    <result column="dep_desc" property="depDesc" jdbcType="VARCHAR" />
+  </resultMap>
+
+
+   
+    <!-- 查询所有 -->
+ <select id="findPage" resultMap="BaseResultMap" >
+    select * from dep where dep_statu=0
+ </select>
+ 
+ <!-- 恢复部门  置状态 -->
+ <update id="recover" parameterType="int">
+    update dep set dep_statu=1 where dep_id=#{id}
+ </update>
+ 
+ <!-- 根据id删除 -->
+ <delete id="delById" parameterType="int">
+    delete from dep where dep_id=#{id}
+ </delete>
+</mapper>

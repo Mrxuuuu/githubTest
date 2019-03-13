@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xuwem.show.mapper.DepMapper" >
+ 
+ <resultMap id="BaseResultMap" type="com.xuwem.show.pojo.Department" >
+    <id column="dep_id" property="depId" jdbcType="BIGINT" />
+    <result column="dep_name" property="depName" jdbcType="VARCHAR" />
+    <result column="dep_duty" property="depDuty" jdbcType="VARCHAR" />
+    <result column="dep_statu" property="depStatu" jdbcType="VARCHAR" />
+    <result column="dep_desc" property="depDesc" jdbcType="VARCHAR" />
+  </resultMap>
+ 
+<!--  <select id="findOne" resultType="user" parameterType="int">
+    select * from user where user_id=#{id};
+ </select> -->
+ 
+ <!-- 查询所有 -->
+ <select id="findAll" resultMap="BaseResultMap" >
+    select * from dep where dep_statu=1
+ </select>
+ 
+  
+ <!-- <delete id="" >
+    
+ </delete> -->
+ 
+ <!-- 逻辑删除 -->
+ <update id="logicDelById" parameterType="int">
+   update dep set dep_statu=0 where dep_id=#{depId};
+ </update>
+ 
+ <!-- 部门信息修改  -->
+ <update id="update" parameterType="com.xuwem.show.pojo.Department">
+   update dep 
+   <set>
+     <if test="depName!=null and depName!=''">
+        dep_name=#{depName},
+     </if>
+  
+     <if test="depDuty!=null and depDuty!=''">
+        dep_duty=#{depDuty},
+     </if>
+  
+     <if test=" depStatu!=null and  depStatu!=''">
+     dep_statu=#{depStatu},
+     </if>
+   
+     <if test="depDesc!=null and depDesc!=''">
+        dep_desc=#{depDesc},
+     </if>
+   </set>
+   
+   where dep_id=#{depId};
+ </update>
+ 
+ <!-- 新增部门 -->
+ <insert id="insert" parameterType="com.xuwem.show.pojo.Department">
+    insert into dep
+     <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="depName!=null">
+           dep_name,
+        </if>
+        <if test="depDuty!=null">
+          dep_duty,
+        </if>
+	    <if test="depDesc!=null">
+         dep_desc,
+        </if>
+         dep_statu,
+    </trim>
+    <trim prefix="values(" suffix=")" suffixOverrides=",">
+         <if test="depName!=null">
+           #{depName},
+          </if>
+         
+         <if test="depDuty!=null">
+          #{depDuty},
+          </if>
+	     
+	    <if test="depDesc!=null">
+         #{depDesc},
+         </if>
+         1,
+    </trim>
+ </insert>
+ 
+ 
+ 
+ <!-- 修改前查询 -->
+ <select id="findById" resultMap="BaseResultMap" parameterType="int" >
+   select *  from dep where dep_id=#{id};
+ </select>
+ 
+ <delete id="delById" parameterType="int">
+   delete from dep where dep_id=#{id};
+ </delete>
+ 
+</mapper>

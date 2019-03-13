@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.xuwem.show.mapper.UserMapper">
+
+   <resultMap type="com.xuwem.show.pojo.User" id="BaseResultMap">
+      <id column="user_id" property="userId" jdbcType="BIGINT" />
+	    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+	    <result column="password" property="password" jdbcType="VARCHAR" />
+	    <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
+	    <result column="user_level" property="userLevel" jdbcType="VARCHAR" />
+	    <result column="phone" property="phone" jdbcType="VARCHAR" />
+	    <result column="address" property="address" jdbcType="VARCHAR" />
+   </resultMap>
+   
+  <!--  查找全部 -->
+   <select id="findAll" resultMap="BaseResultMap">
+     select * from user
+   </select>
+ 
+ <!--  根据id查询 -->
+   <select id="findById" parameterType="int" resultMap="BaseResultMap">
+     select * from user where user_id=#{userId}
+   </select>
+</mapper>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- 页面meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>订单管理</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../js/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../js/plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="../js/plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+	<script src="../js/plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <script src="../js/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/plugins/angularjs/angular.min.js"></script>
+    <!-- 分页组件开始 -->
+	<script src="../js/plugins/angularjs/pagination.js"></script>
+	<link rel="stylesheet" href="../js/plugins/angularjs/pagination.css"/>
+	
+	<!-- 分页组件结束 -->
+	<script type="text/javascript" src="../js/base_pagination.js"></script>
+	<script type="text/javascript" src="../js/service/EmpService.js"></script>
+	<script type="text/javascript" src="../js/controller/EmpController.js"></script> 
+</head>
+
+<body class="hold-transition skin-red sidebar-mini" ng-app="show" ng-controller="EmpController">
+  <!-- .box-body -->
+                {{1+1}}
+                    <div class="box-header with-border">
+                        <h3 class="box-title">商品管理</h3>
+                    </div>
+
+                    <div class="box-body">
+
+                        <!-- 数据表格 -->
+                        <div class="table-box">
+
+                            <!--工具栏-->
+                            <div class="pull-left">
+                                <div class="form-group form-inline">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" title="新建" data-toggle="modal" data-target="#editModal" ng-click="entity={}"><i class="fa fa-file-o"></i> 新建</button>
+                                        <!-- <button type="button" class="btn btn-default" title="删除" ><i class="fa fa-trash-o"></i> 删除</button> -->
+                                        <!-- <button type="button" class="btn btn-default" title="提交审核" ><i class="fa fa-check"></i> 提交审核</button> -->
+                                        <!-- <button type="button" class="btn btn-default" title="屏蔽" onclick='confirm("你确认要屏蔽吗？")'><i class="fa fa-ban"></i> 屏蔽</button> -->
+                                        <button type="button" class="btn btn-default" title="刷新" onclick="window.location.reload();"><i class="fa fa-refresh"></i> 刷新</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-tools pull-right">
+                        <div class="has-feedback">
+                                 <!-- 用户id查询:<input ng-model="Queryentity.info">									
+						<button class="btn btn-default" ng-click="reloadList()">查询</button> -->
+                                
+                                                     查询类别： <select ng-model="Queryentity.type">
+                                         	<option value="" selected="selected">全部</option>      
+                                         	<option value="name">商品名称</option>  <!-- 模糊查询 -->  
+                                         	<option value="user">用户id</option>  <!-- 精确查询 -->
+                                         	<option value="charge">负责人id</option>  <!-- 精确查询 -->
+                                         	<option value="statu">商品状态</option>  <!-- 模糊查询 --> 
+                                        </select>                
+							                  请根据类别输入查询信息：<input ng-model="Queryentity.info">									
+									<button class="btn btn-default" ng-click="reloadList()">查询</button>                                    
+                                </div>
+                            </div>
+                            <!--工具栏/-->
+
+			                  <!--数据列表-->
+			                  <table id="dataList" class="table table-bordered table-striped table-hover dataTable">
+			                      <thead>
+			                          <tr>
+			                              <th class="" style="padding-right:0px">
+			                                  <input id="selall" type="checkbox" class="icheckbox_square-blue">
+			                              </th> 
+			                              
+										  <th class="sorting_asc">员工ID</th>
+									      <th class="sorting">员工名称</th>
+									      <th class="sorting">员工性别</th>
+									      <th class="sorting">员工年龄</th>
+									      <th class="sorting">部门</th>						      
+									      <th class="sorting">员工状态</th>
+									      
+									      <th class="sorting">头像</th>						     						
+					                      <th class="sorting">职责</th>
+					                      <th class="sorting">电话号码</th>
+					                      <th class="sorting">修改</th>
+					                      <th class="sorting">删除</th>
+			                          </tr>
+			                      </thead>
+			                      <tbody>
+			                          <tr ng-repeat="entity in list">
+			                          
+			                              <td><input  type="checkbox" ng-click="updateSelect($event,entity.empId)"/></td>			                              
+				                          <td>{{entity.empId}}</td>
+									      <td>{{entity.empName}}</td>
+									      <td>{{entity.empSex}}</td>
+									      <td>{{entity.empAge}}</td>
+									      <td>{{entity.depart}}</td>
+									      <td>{{entity.empStatu}}</td>
+									      <td><img src="../img/{{entity.empImg}}" width="40px" height="40px"/></td>
+									      <td>{{entity.empPost}}</td>
+		                                  <td>
+		                                  	{{entity.phone}}
+		                                  </td>	
+		                                   <td class="text-center">   
+		                                                                         
+		                                 	  <button type="button" class="btn bg-olive btn-xs" data-toggle="modal" data-target="#editModal" ng-click="findById(entity.order.ordId,entity.order.userId,entity.order.chargeId)">修改</button>                  
+		                                  </td>	                                  
+		                                  <td class="text-center">                                          
+		                                 	  <button type="button" class="btn bg-olive btn-xs" ng-click="delById(entity.empId)">删除</button>                  
+		                                  </td>
+		                                 <!--  <td>{{entity.order.ordId}}{{entity.order.userId}}{{entity.order.chargeId}}</td> -->
+		                                  
+			                          </tr>
+			                      </tbody>
+			                      
+			                  </table>
+			                  <!--数据列表/-->                        
+							  <tm-pagination conf="paginationConf"></tm-pagination>
+							 
+                        </div>
+                        <!-- 数据表格 /-->
+                        
+                        
+                     </div>
+                    <!-- /.box-body -->
+		
+		
+		<!-- 编辑页面 -->
+<!-- <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" >
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			<h3 id="myModalLabel">品牌编辑</h3>
+		</div>
+		<div class="modal-body">		
+			<table class="table table-bordered table-striped"  width="800px">
+			
+		      	<tr>
+		      		<td>订单类别</td>
+		      		<td><input  class="form-control" placeholder="订单名称" ng-model="entity.order.ordType">  </td>
+		      	</tr>		      	
+		      	<tr>
+		      		<td>总价格</td>
+		      		<td><input  class="form-control" placeholder="总价格" ng-model="entity.order.price">  </td>
+		      	</tr>	
+		      	 <td>部门状态</td>
+		      		<td><input  class="form-control" placeholder="部门状态" ng-model="entity.depStatu">  </td>
+		      	</tr
+		      	
+		      	做下拉
+		       	<tr> 
+		      		<td>订单负责人id</td>
+		      		<td><input  class="form-control" placeholder="订单负责人" ng-model="entity.order.chargeId">  </td>
+		      	</tr> 
+		      	<tr> 
+		      		<td>用户id</td>
+		      		<td><input  class="form-control" placeholder="订单负责人" ng-model="entity.order.userId">  </td>
+		      	</tr> 
+		      	<tr>
+		      		<td>商品名称</td>
+		      		<td><input  class="form-control" placeholder="商品名称" ng-model="entity.order.goodsName">  </td>
+		      	</tr>
+		      	<tr>
+		      		<td>商品数量</td>
+		      		<td><input  class="form-control" placeholder="商品数量" ng-model="entity.order.goodsNum">  </td>
+		      	</tr>	
+		      	<tr>
+		      		<td>订单状态</td>
+		      		<td><input  class="form-control" placeholder="部门备注" ng-model="entity.order.ordStatu">  </td>
+		      	</tr>		      	
+			 </table>				
+		</div>
+		<div class="modal-footer">						
+			<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" ng-click="save()">保存</button>
+			<button class="btn btn-default" data-dismiss="modal" aria-hidden="true" >关闭</button>
+		</div>
+	  </div>
+	</div>
+</div>
+</body> -->
+
+</html>
